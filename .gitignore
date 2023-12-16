@@ -12,6 +12,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+#gsap bonus
+/src/lib/gsap/gsap-bonus.tgz
 
 # environment variables
 .env
