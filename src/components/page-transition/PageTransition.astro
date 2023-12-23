@@ -1,0 +1,96 @@
+---
+import s from './styles.module.scss'
+---
+
+<script>
+	import { gsap } from '~/lib/gsap'
+
+	let gridCreated = false
+
+	const tl = gsap.timeline({ paused: true }),
+		colCount = 24,
+		colWidth = window.innerWidth / colCount,
+		rowsCount = Math.ceil(window.innerHeight / colWidth),
+		container = document.querySelector('#page-transition'),
+		grid: [number, number] = [rowsCount, colCount]
+
+	function createGrid() {
+		for (let i = 0; i < rowsCount * colCount; i++) {
+			let box = document.createElement('span')
+			box.className = 'w-full aspect-square bg-dark rounded-full'
+			container?.appendChild(box)
+		}
+	}
+
+	function playTransition(
+		from: gsap.utils.DistributeConfig['from'] = 'center',
+		g: [number, number] = grid
+	) {
+		//one stagger call does all the animation:
+		tl.to('#page-transition span', {
+			duration: 1,
+			scale: 1,
+			autoAlpha: 1,
+			stagger: {
+				amount: 1.5,
+				grid: g,
+				from: from
+			},
+			ease: 'power2.inOut'
+		}).to(
+			'#page-transition span',
+			{
+				delay: 0.5,
+				duration: 1,
+				scale: 0,
+				autoAlpha: 0,
+				stagger: {
+					amount: 1.5,
+					grid: g,
+					from: from
+				},
+				ease: 'power2.inOut'
+			},
+
+			'<0.5'
+		)
+		// .to(
+		// 	'#page-transition',
+		// 	{
+		// 		duration: 1.2,
+		// 		background: '#0b0b0b',
+		// 		delay: 0.5
+		// 	},
+		// 	'0'
+		// )
+	}
+
+	document.addEventListener('DOMContentLoaded', () => {
+		if (gridCreated) return
+		createGrid()
+
+		gridCreated = true
+	})
+
+	document.addEventListener('astro:before-preparation', (ev: any) => {
+		const originalLoader = ev.loader
+		ev.loader = async () => {
+			await originalLoader()
+			playTransition('center', grid)
+			tl.play()
+		}
+	})
+
+	// todo: handle resize
+</script>
+
+<div
+	transition:persist
+	class="pointer-events-none fixed inset-0 z-[998] flex items-center justify-center overflow-clip"
+>
+	<div
+		id="page-transition"
+		class:list={[s.container, 'grid w-full justify-center']}
+	>
+	</div>
+</div>

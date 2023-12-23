@@ -1,0 +1,7 @@
+.container {
+	grid-template-columns: repeat(24, 1fr);
+
+	span {
+		transform: scale(0);
+	}
+}

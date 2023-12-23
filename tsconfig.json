@@ -10,5 +10,6 @@
 			"~/*": ["./*"]
 		}
 	},
+	"include": ["*/*.d.ts", "**/*.ts", "**/*.tsx", "**/*.astro"],
 	"exclude": ["node_modules"]
 }

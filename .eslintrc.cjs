@@ -20,5 +20,6 @@ module.exports = {
 				// "astro/no-set-html-directive": "error"
 			}
 		}
-	]
+	],
+	plugins: ['react', 'react-hooks', 'simple-import-sort', '@typescript-eslint']
 }

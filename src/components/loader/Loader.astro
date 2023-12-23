@@ -1,0 +1,50 @@
+---
+const placeholder = 'JOYBOY'.split('')
+---
+
+<script>
+	import { gsap } from '~/lib/gsap'
+
+	const loader = gsap
+		.timeline({ repeat: -1, repeatDelay: 1 })
+		.to('.loading-char', { duration: 0.5, opacity: 1, stagger: 0.1 })
+		.to('.loading-char', { duration: 0.5, opacity: 0, stagger: 0.1 })
+
+	// add event listener to stop animation when page is loaded
+	// window.addEventListener('load', () => {
+	// 	loader.pause()
+	// 	gsap.to('.fixed', {
+	// 		duration: 0.5,
+	// 		opacity: 0,
+	// 		delay: 0.5,
+	// 		onComplete: () => {
+	// 			document.querySelector('.fixed')?.remove()
+	// 		}
+	// 	})
+	// })
+
+	setTimeout(() => {
+		loader.pause()
+		gsap.to('#loader', {
+			duration: 0.5,
+			opacity: 0,
+			delay: 0.5,
+			onComplete: () => {
+				document.querySelector('.fixed')?.remove()
+			}
+		})
+	}, 2000)
+</script>
+
+<div
+	id="loader"
+	class="fixed inset-0 z-[999] flex items-center justify-center bg-dark"
+>
+	<p class="font-heading text-7xl font-bold text-light">
+		{
+			placeholder.map((letter, i) => (
+				<span class="loading-char opacity-0">{letter}</span>
+			))
+		}
+	</p>
+</div>

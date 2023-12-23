@@ -49,12 +49,15 @@
 }
 
 :root {
+	--font-heading: 'Telegraf', sans-serif;
+	--font-body: 'Geist', sans-serif;
 	--font-system: -apple-system, blinkmacsystemfont, segoe ui, roboto, oxygen,
 		ubuntu, cantarell, fira sans, droid sans, helvetica neue, sans-serif;
 	--inspect-color: #f00;
 
 	// base colors
 	--color-black: #000;
+	--color-dark: #0b0b0b;
 	--color-white: #f9f8f3;
 	--color-paper: #f2eee8;
 	--color-gray: #d9d9d9;
