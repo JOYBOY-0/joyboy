@@ -8,7 +8,8 @@
 		"build": "astro check && astro build",
 		"preview": "astro preview",
 		"lint": "prettier --write . --plugin=prettier-plugin-astro && stylelint '**/*.{css,scss}'",
-		"astro": "astro"
+		"astro": "astro",
+		"postinstall": "basehub"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.3.3",
